@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int a[8];
+char* day[8] = { "","MONDAY","TUESDAY","WEDNSDAY","THUDDAY","FRIDAY","SATURDAY","SUNDAY" };
+int main()
+{
+	int i, j, t;
+	a[4] = 6;//F
+	for (i = 1; i <= 3; i++)
+	{
+		a[i] = 2;//假设B的排班，周一周二或周三
+		if (!a[i + 3])
+			a[i + 3] = 7;//B三天后，没人值班就排G
+		else
+		{
+			a[i] = 0;//否则排错
+			continue;
+		}
+
+		for (t = 1; t <= 3; t++)//假设e的时间
+		{
+			if (!a[t])
+				a[t] = 5;//当天无人则排E
+			else
+				continue;
+			if (!a[t + 2])
+				a[t + 2] = 4;//两天后无人则排D
+			else {
+				a[t] = 0;
+				continue;//否则E不对
+			}
+
+
+			for (j = 5; j < 7; j++)
+			{
+				if (!a[j])
+					a[j] = 3;//无人则c
+				else continue;
+				if (!a[j + 1])
+					a[j + 1] = 1;//C后一天是A
+				else
+				{
+					a[j] = 0; continue;
+				}
+
+				for (i = 1; i <= 7; i++)
+					printf("Doctor %c is on duty %s.\n", 'A' + a[i] - 1, day[i]);
+				exit(0);
+			}
+		}
+	}
+}
