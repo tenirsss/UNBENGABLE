@@ -1,0 +1,25 @@
+#include<stdio.h>
+void inverse(char *p);
+int main()
+{	 	     	  
+    char a[80];
+    gets(a); 
+    inverse(a);  //2
+    puts(a);
+}	 	     	  
+void inverse(char *p)
+{	 	     	  
+    char *q;
+    char t;
+    q = p;
+    while (*q != '\0')  
+    {	 	     	  
+        q++;
+    }
+    for (q--; p < q; p++, q--)//2
+    {	 	     	  
+        t = *p;//2
+        *p = *q;//2
+        *q = t;//2
+    }
+}	 	  
